@@ -93,7 +93,10 @@ def evaluate_trained(
             test_yaml_path = data_root / "test_data.yaml"
             
             # Create YAML with test images as validation (so model.val() can use it)
+            # Ultralytics requires both 'train' and 'val' keys, so we include train path
+            # but use test as val for evaluation
             test_yaml_content = {
+                'train': yaml_data.get('train', yaml_data['test']),  # Required, use train or test path
                 'val': yaml_data['test'],  # Use test path as val for evaluation
                 'nc': yaml_data.get('nc', 1),
                 'names': yaml_data.get('names', ['smoke'])
