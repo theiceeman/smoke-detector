@@ -1,0 +1,26 @@
+{
+  "yolov8": {
+    "baseline": {
+      "error": "No module named 'ultralytics'"
+    },
+    "trained": {
+      "error": "Unknown error"
+    }
+  },
+  "yolov11": {
+    "baseline": {
+      "error": "No module named 'ultralytics'"
+    },
+    "trained": {
+      "error": "Unknown error"
+    }
+  },
+  "rtdetr": {
+    "baseline": {
+      "error": "RT-DETR not available. Install ultralytics with RT-DETR support."
+    },
+    "trained": {
+      "error": "Unknown error"
+    }
+  }
+}

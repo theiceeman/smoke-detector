@@ -1,7 +1,6 @@
 """
 Smoke Detection Experiment
 Compares YOLOv8, YOLOv11, and RT-DETR models
-Shows improvement through domain-specific training
 """
 
 import torch
@@ -18,7 +17,7 @@ from evaluate import evaluate_baseline, evaluate_trained
 
 def run_smoke_detection_experiment(
     data_root: str = "dataset",
-    num_epochs: int = 50,
+    num_epochs: int = 20,
     learning_rate: float = 0.001,
     device: torch.device = None,
     patience: int = 5,
@@ -36,8 +35,7 @@ def run_smoke_detection_experiment(
     if device is None:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # ========== SETUP ==========
-    print("=" * 80)
+
     print("SETTING UP SMOKE DETECTION EXPERIMENT")
     print("=" * 80)
 
@@ -46,7 +44,6 @@ def run_smoke_detection_experiment(
     test_dir = data_root / "test" / "images"
     
     # Load test images (used for both baseline and evaluation)
-    print("\nPreparing test set...")
     test_images = load_test_images(str(test_dir))
     print(f"  Test set: {len(test_images)} images")
     

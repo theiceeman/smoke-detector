@@ -7,8 +7,8 @@ from models.unified import create_model
 def train_model(
     model_name: str,
     dataset_yaml: str,
-    num_epochs: int = 50,
-    patience: int = 10,
+    num_epochs: int = 20,
+    patience: int = 6,
     imgsz: int = 640,
     batch: int = 16,
     save_dir: str = "checkpoints"
@@ -31,26 +31,29 @@ def train_model(
     # Create pre-trained model
     model = create_model(model_name, pretrained=True)
     
-    # Setup save directory
-    save_path = Path(save_dir) / model_name
-    save_path.mkdir(parents=True, exist_ok=True)
-    
     # Train model
+    # Note: Ultralytics saves to runs/detect/{project}/{name}/weights/best.pt
+    print(f"  Starting training for {model_name.upper()}...")
     results = model.train(
         data=dataset_yaml,
         epochs=num_epochs,
         patience=patience,
         imgsz=imgsz,
         batch=batch,
-        project=str(save_path),
-        name="train",
+        project=save_dir,  # Creates runs/detect/{save_dir}/
+        name=model_name,    # Creates runs/detect/{save_dir}/{model_name}/
         save=True,
         plots=True,
         verbose=True
     )
     
-    # Path to best model
-    best_model_path = save_path / "train" / "weights" / "best.pt"
+    # Path to best model (Ultralytics structure: runs/detect/{project}/{name}/weights/best.pt)
+    best_model_path = Path("runs") / "detect" / save_dir / model_name / "weights" / "best.pt"
+    
+    # If not found, try to get from results object
+    if not best_model_path.exists():
+        if hasattr(results, 'save_dir'):
+            best_model_path = Path(results.save_dir) / "weights" / "best.pt"
     
     if not best_model_path.exists():
         raise FileNotFoundError(f"Best model not found at {best_model_path}")
