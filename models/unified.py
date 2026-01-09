@@ -29,12 +29,20 @@ def create_model(model_name: str, pretrained: bool = True, model_path: str = Non
     
     elif model_name.lower() == 'yolov11':
         from ultralytics import YOLO
+        # Try YOLOv11 model names (correct format is 'yolo11n.pt')
         try:
-            return YOLO('yolov11n.pt')
-        except:
-            # Fallback to YOLOv8 if v11 not available
-            print("  ⚠ YOLOv11 not available, using YOLOv8")
-            return YOLO('yolov8n.pt')
+            return YOLO('yolo11n.pt')
+        except Exception as e1:
+            # Try alternative naming
+            try:
+                return YOLO('yolov11n.pt')
+            except Exception as e2:
+                # If both fail, raise error with helpful message
+                raise RuntimeError(
+                    f"YOLOv11 not available. Tried 'yolo11n.pt' and 'yolov11n.pt'. "
+                    f"Errors: {e1}, {e2}. "
+                    f"Please ensure ultralytics>=8.0.0 is installed: pip install --upgrade ultralytics"
+                )
     
     elif model_name.lower() == 'rtdetr':
         try:

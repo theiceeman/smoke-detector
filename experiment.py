@@ -128,11 +128,18 @@ def run_smoke_detection_experiment(
             )
             results[model_name]["trained"] = trained_results
             
-            print(f"  Precision: {trained_results['precision']:.2%}")
-            print(f"  Recall: {trained_results['recall']:.2%}")
-            print(f"  mAP@0.5: {trained_results['mAP50']:.2%}")
-            print(f"  mAP@0.5:0.95: {trained_results['mAP50_95']:.2%}")
-            print(f"  Images detected: {trained_results['images_with_detections']}/{len(test_images)}")
+            print(f"  TEST SET METRICS (14 images):")
+            print(f"    Precision: {trained_results['precision']:.2%}")
+            print(f"    Recall: {trained_results['recall']:.2%}")
+            print(f"    mAP@0.5: {trained_results['mAP50']:.2%}")
+            print(f"    mAP@0.5:0.95: {trained_results['mAP50_95']:.2%}")
+            print(f"    Images with detections: {trained_results['images_with_detections']}/{len(test_images)}")
+            
+            if trained_results.get('val_precision') is not None:
+                print(f"  VALIDATION SET METRICS (10 images, for reference):")
+                print(f"    Precision: {trained_results['val_precision']:.2%}")
+                print(f"    Recall: {trained_results['val_recall']:.2%}")
+                print(f"    mAP@0.5: {trained_results['val_mAP50']:.2%}")
         except Exception as e:
             print(f"  ❌ Error evaluating {model_name}: {e}")
             results[model_name]["trained"] = {"error": str(e)}
@@ -159,10 +166,12 @@ def run_smoke_detection_experiment(
         print(f"  Trained detections: {trained_detections}/{len(test_images)}")
         print(f"  Improvement: +{improvement} images")
         
-        if trained.get("precision"):
-            print(f"  Precision: {trained['precision']:.2%}")
-            print(f"  Recall: {trained['recall']:.2%}")
-            print(f"  mAP@0.5: {trained['mAP50']:.2%}")
+        if trained.get("precision") is not None:
+            print(f"  Test Precision: {trained['precision']:.2%}")
+            print(f"  Test Recall: {trained['recall']:.2%}")
+            print(f"  Test mAP@0.5: {trained['mAP50']:.2%}")
+            if trained.get('val_precision') is not None:
+                print(f"  Val Precision: {trained['val_precision']:.2%} (for reference)")
 
     # ========== SAVE RESULTS ==========
     print("\n" + "=" * 80)
