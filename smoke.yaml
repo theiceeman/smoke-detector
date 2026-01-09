@@ -1,0 +1,5 @@
+path: dataset  # folder containing train/val/test
+train: train/images
+val: valid/images
+names:
+  0: smoke
