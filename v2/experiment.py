@@ -52,7 +52,7 @@ def run_smoke_detection_experiment(
 
     models_to_test = [
         "yolov8",
-        #    'yolov11', 'rtdetr'
+           'yolov11', 'rtdetr'
     ]
 
     # Initialize results storage
