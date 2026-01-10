@@ -20,10 +20,10 @@ from evaluate import evaluate_baseline, evaluate_trained
 
 def run_smoke_detection_experiment(
     data_root: str = "dataset",
-    num_epochs: int = 20,
+    num_epochs: int = 30,
     learning_rate: float = 0.001,
     device: torch.device = None,
-    patience: int = 5,
+    patience: int = 50,
 ):
     """
     Run smoke detection experiment comparing YOLOv8, YOLOv11, and RT-DETR.
