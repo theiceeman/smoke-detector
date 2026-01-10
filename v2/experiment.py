@@ -180,16 +180,10 @@ if __name__ == "__main__":
         help="Root directory containing dataset",
     )
     parser.add_argument(
-        "--epochs", type=int, default=50, help="Number of training epochs"
+        "--epochs", type=int, default=30, help="Number of training epochs"
     )
     parser.add_argument(
-        "--lr",
-        type=float,
-        default=0.001,
-        help="Learning rate (not used for Ultralytics)",
-    )
-    parser.add_argument(
-        "--patience", type=int, default=10, help="Early stopping patience"
+        "--patience", type=int, default=50, help="Early stopping patience"
     )
 
     args = parser.parse_args()
@@ -197,6 +191,5 @@ if __name__ == "__main__":
     run_smoke_detection_experiment(
         data_root=args.data_root,
         num_epochs=args.epochs,
-        learning_rate=args.lr,
         patience=args.patience,
     )
