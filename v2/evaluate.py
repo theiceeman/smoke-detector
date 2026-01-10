@@ -71,8 +71,9 @@ def evaluate_trained(
         if hasattr(val_metrics, 'box'):
             val_precision = float(getattr(val_metrics.box, 'p', 0))
             val_recall = float(getattr(val_metrics.box, 'r', 0))
-            val_mAP50 = float(getattr(val_metrics.box, 'mAP50', 0))
-            val_mAP50_95 = float(getattr(val_metrics.box, 'mAP50-95', 0))
+            # Try both lowercase and uppercase attribute names
+            val_mAP50 = float(getattr(val_metrics.box, 'map50', getattr(val_metrics.box, 'mAP50', 0)))
+            val_mAP50_95 = float(getattr(val_metrics.box, 'map50-95', getattr(val_metrics.box, 'mAP50-95', 0)))
     except Exception as e:
         print(f"  ⚠ Validation metrics extraction failed: {e}")
     
@@ -110,8 +111,9 @@ def evaluate_trained(
             if hasattr(test_metrics, 'box'):
                 test_precision = float(getattr(test_metrics.box, 'p', 0))
                 test_recall = float(getattr(test_metrics.box, 'r', 0))
-                test_mAP50 = float(getattr(test_metrics.box, 'mAP50', 0))
-                test_mAP50_95 = float(getattr(test_metrics.box, 'mAP50-95', 0))
+                # Try both lowercase and uppercase attribute names
+                test_mAP50 = float(getattr(test_metrics.box, 'map50', getattr(test_metrics.box, 'mAP50', 0)))
+                test_mAP50_95 = float(getattr(test_metrics.box, 'map50-95', getattr(test_metrics.box, 'mAP50-95', 0)))
         except Exception as e:
             print(f"  ⚠ Test evaluation failed: {e}")
             print(f"     Using validation metrics as fallback.")
