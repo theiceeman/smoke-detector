@@ -30,11 +30,11 @@ def evaluate_baseline(model, test_images: List[Path]) -> Dict:
             images_with_detections += 1
             total_detections += num_detections
         
-        detection_details.append({
-            'image': img_path.name,
-            'detections': num_detections,
-            'detected': num_detections > 0
-        })
+        # detection_details.append({
+        #     'image': img_path.name,
+        #     'detections': num_detections,
+        #     'detected': num_detections > 0
+        # })
     
     return {
         'images_with_detections': images_with_detections,

@@ -1,4 +1,8 @@
 # python3 09-project/yolo.py
+""" 
+YOLOv8 detection on a single image. 
+we used it for the first test we did on yolo to know how well it performs with smoke. 
+"""
 from ultralytics import YOLO
 import cv2
 import os

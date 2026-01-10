@@ -7,50 +7,7 @@
       "total_detections": 0
     },
     "trained": {
-      "precision": 0.0036666666666666666,
-      "recall": 1.0,
-      "mAP50": 0.0,
-      "mAP50_95": 0.0,
-      "images_with_detections": 0,
-      "total_images": 14,
-      "improvement": 0,
-      "model_path": "/content/smoke-detector/checkpoints/yolov8/weights/best.pt"
-    }
-  },
-  "yolov11": {
-    "baseline": {
-      "images_with_detections": 0,
-      "total_images": 14,
-      "detection_rate": 0.0,
-      "total_detections": 0
-    },
-    "trained": {
-      "precision": 0.0036666666666666666,
-      "recall": 1.0,
-      "mAP50": 0.0,
-      "mAP50_95": 0.0,
-      "images_with_detections": 0,
-      "total_images": 14,
-      "improvement": 0,
-      "model_path": "/content/smoke-detector/checkpoints/yolov11/weights/best.pt"
-    }
-  },
-  "rtdetr": {
-    "baseline": {
-      "images_with_detections": 14,
-      "total_images": 14,
-      "detection_rate": 1.0,
-      "total_detections": 30
-    },
-    "trained": {
-      "precision": 0.18933444609849548,
-      "recall": 0.6363636363636364,
-      "mAP50": 0.0,
-      "mAP50_95": 0.0,
-      "images_with_detections": 3,
-      "total_images": 14,
-      "improvement": -11,
-      "model_path": "/content/smoke-detector/checkpoints/rtdetr/weights/best.pt"
+      "error": "No module named 'ultralytics'"
     }
   }
 }
