@@ -29,7 +29,6 @@ wheels/
 # PyTorch
 *.pth
 *.pt
-checkpoints/
 
 # Results - track results directory
 # results/ is not ignored, so results will be tracked
